@@ -42,6 +42,14 @@
       <a href="#" class="text-gray-600 hover:text-gray-900 text-2xl">
         <i class="fas fa-user-circle"></i>
       </a>
+
+      <!-- Logout -->
+  <form method="POST" action="{{ route('logout') }}">
+    @csrf
+    <button type="submit" class="text-gray-600 hover:text-red-600 text-sm font-semibold">
+      <i class="fas fa-sign-out-alt mr-1"></i> Logout
+    </button>
+  </form>
     </div>
   </div>
 </header>
