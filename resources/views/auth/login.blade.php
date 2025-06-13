@@ -2,6 +2,16 @@
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
 
+    <!-- Logout Button -->
+    @auth
+        <form method="POST" action="{{ route('logout') }}" class="mb-4">
+            @csrf
+            <x-primary-button>
+                {{ __('Logout') }}
+            </x-primary-button>
+        </form>
+    @endauth
+
     <form method="POST" action="{{ route('login') }}">
         @csrf
 

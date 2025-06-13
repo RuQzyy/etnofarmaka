@@ -7,7 +7,15 @@ use App\Http\Controllers\PenggunaController;
 use App\Http\Controllers\ObatController;
 
 Route::get('/', function () {
-    return view('auth.login');
+    return view('landing');
+});
+
+Route::get('/landing', function () {
+    return view('landing'); // ganti dengan nama file blade halaman landingmu
+});
+
+Route::get('/tentang', function () {
+    return view('tentang'); // pastikan kamu punya file resources/views/tentang.blade.php
 });
 
 Route::middleware(['auth', 'role:admin'])->group(function () {
