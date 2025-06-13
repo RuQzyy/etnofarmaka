@@ -54,4 +54,10 @@
             </div>
         </div>
     </form>
+    <form method="POST" action="{{ route('logout') }}" class="mt-6">
+        @csrf
+        <x-primary-button>
+            {{ __('Logout') }}
+        </x-primary-button>
+    </form>
 </x-guest-layout>

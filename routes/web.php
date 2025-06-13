@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\PenggunaController;
+use App\Http\Controllers\ObatController;
 
 Route::get('/', function () {
     return view('auth.login');
@@ -26,3 +27,5 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__.'/auth.php';
+
+Route::resource('obat', ObatController::class)->middleware('auth');
