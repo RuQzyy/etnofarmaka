@@ -17,6 +17,7 @@ return new class extends Migration
             $table->text('keterangan')->nullable();
             $table->decimal('harga', 15, 2);
             $table->string('foto')->nullable();
+            $table->integer('stok')->default(0);
             $table->timestamps();
         });
     }

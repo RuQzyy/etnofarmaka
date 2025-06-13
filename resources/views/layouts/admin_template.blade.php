@@ -3,7 +3,7 @@
   <!--begin::Head-->
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Admin  | Dashboard</title>
+    <title>AdminLTE v4 | Dashboard</title>
     <!--begin::Primary Meta Tags-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="title" content="AdminLTE v4 | Dashboard" />
@@ -42,7 +42,7 @@
     />
     <!--end::Third Party Plugin(Bootstrap Icons)-->
     <!--begin::Required Plugin(AdminLTE)-->
-    <link rel="stylesheet" href="../../dist/css/adminlte.css" />
+    <link rel="stylesheet" href="{{asset('dist/css/adminlte.css')}}" />
     <!--end::Required Plugin(AdminLTE)-->
     <!-- apexcharts -->
     <link
@@ -93,7 +93,7 @@
         <!--begin::Sidebar Brand-->
         <div class="sidebar-brand">
           <!--begin::Brand Link-->
-          {{-- <a href="{{route('admin.index')}}" class="brand-link"> --}}
+          <a href="#" class="brand-link">
             <!--begin::Brand Image-->
             <img
               src="{{asset('asset/kopi.png')}}"
@@ -102,7 +102,7 @@
             />
             <!--end::Brand Image-->
             <!--begin::Brand Text-->
-            <span class="brand-text fw-light">etnofarmaka</span>
+            <span class="brand-text fw-light">Etnofarmaka</span>
             <!--end::Brand Text-->
           </a>
           <!--end::Brand Link-->
@@ -119,19 +119,25 @@
               data-accordion="false"
             >
               <li class="nav-item">
-                {{-- <a href="{{route('admin.index')}}" class="nav-link"> --}}
+                <a href="#" class="nav-link">
                   <i class="nav-icon fa fa-user"></i>
                   <p>Dashboard</p>
                 </a>
               </li>
               <li class="nav-item">
-                {{-- <a href="{{}}" class="nav-link"> --}}
+                <a href="{{route('obat.index')}}" class="nav-link">
                   <i class="nav-icon bi bi-cart-fill"></i>
                   <p>Obat</p>
                 </a>
               </li>
+              {{-- <li class="nav-item">
+                <a href="{{route('keuangan.index')}}" class="nav-link">
+                  <i class="nav-icon bi bi-cash"></i>
+                  <p>Keuangan</p>
+                </a>
+              </li> --}}
               <li class="nav-item">
-                {{-- <a href="{{}}" class="nav-link"> --}}
+                <a href="#" class="nav-link">
                   <i class="fas fa-shopping-basket"></i>
                   <p>Pemesanan</p>
                 </a>
@@ -161,7 +167,7 @@
               <div class="col-sm-6"><h3 class="mb-0">@yield('title-page')</h3></div>
               <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-end">
-                  <li class="breadcrumb-item"><a href="">Home</a></li>
+                  <li class="breadcrumb-item"><a href="#">Home</a></li>
                   <li class="breadcrumb-item active" aria-current="page">@yield('title-page')</li>
                 </ol>
               </div>
