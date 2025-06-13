@@ -1,19 +1,45 @@
+@extends("layouts.admin_template")
 
-<x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 dark:text-white leading-tight">
-            Dashboard Admin
-        </h2>
-    </x-slot>
-
-    <div class="py-10">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg p-6">
-                <h3 class="text-lg font-medium text-gray-900 dark:text-white">Selamat datang, Admin!</h3>
-                <p class="mt-2 text-gray-600 dark:text-gray-300">
-                    Ini adalah halaman dashboard admin. Anda memiliki akses penuh untuk mengelola aplikasi.
-                </p>
-            </div>
+@section("content")
+    <div class="container-fluid">
+    <!-- Info boxes -->
+    <div class="row">
+      <div class="col-12 col-sm-6 col-md-3">
+        <div class="info-box">
+          <span class="info-box-icon text-bg-primary shadow-sm">
+            <i class="bi bi-cart-fill"></i>
+          </span>
+          <div class="info-box-content">
+            <span class="info-box-text">Obat</span>
+            <span class="info-box-number">
+              {{-- {{}} --}}
+            </span>
+          </div>
+          <!-- /.info-box-content -->
         </div>
+        <!-- /.info-box -->
+      </div>
+      <!-- /.col -->
+      <!-- /.col -->
+      <!-- fix for small devices only -->
+      <!-- <div class="clearfix hidden-md-up"></div> -->
+      <!-- /.col -->
+      <div class="col-12 col-sm-6 col-md-3">
+        <div class="info-box">
+          <span class="info-box-icon text-bg-warning shadow-sm">
+            <i class="fas fa-shopping-basket"></i>
+          </span>
+          <div class="info-box-content">
+            <span class="info-box-text">Pemesanan</span>
+            {{-- <span class="info-box-number">{{}}</span> --}}
+          </div>
+          <!-- /.info-box-content -->
+        </div>
+        <!-- /.info-box -->
+      </div>
+      <!-- /.col -->
     </div>
-</x-app-layout>
+    <!-- /.row -->
+</div>
+<!-- /.container-fluid -->
+@endsection
