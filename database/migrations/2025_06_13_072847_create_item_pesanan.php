@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::create('item_pesanan', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('id_pemesanan')->constrained('pemesanan')->onDelete('cascade');
+            $table->foreignId('id_obat')->constrained('obat')->onDelete('cascade');
+            $table->integer('jumlah')->default(1);
             $table->timestamps();
         });
     }
