@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Obat;
+use Illuminate\Support\Facades\Storage;
+
 
 class ObatController extends Controller
 {
@@ -31,10 +33,8 @@ class ObatController extends Controller
         $obat = new Obat($validatedData);
 
         if ($request->hasFile('foto')) {
-            $file = $request->file('foto');
-            $filename = time() . '.' . $file->getClientOriginalExtension();
-            $file->move(public_path('images/obat'), $filename);
-            $obat->foto = $filename;
+           $path = $request->file('foto')->store('obat', 'public');
+            $obat->foto = $path;
         }
 
         $obat->save();
@@ -67,11 +67,14 @@ class ObatController extends Controller
 
         $obat->fill($validatedData);
 
-        if ($request->hasFile('foto')) {
-            $file = $request->file('foto');
-            $filename = time() . '.' . $file->getClientOriginalExtension();
-            $file->move(public_path('images/obat'), $filename);
-            $obat->foto = $filename;
+      if ($request->hasFile('foto')) {
+            // Hapus foto lama
+            if ($obat->foto && Storage::disk('public')->exists($obat->foto)) {
+                Storage::disk('public')->delete($obat->foto);
+            }
+
+            $path = $request->file('foto')->store('obat', 'public');
+            $obat->foto = $path;
         }
 
         $obat->save();
@@ -79,17 +82,18 @@ class ObatController extends Controller
         return redirect()->route('obat.index')->with('success', 'Obat berhasil diperbarui.');
     }
 
-    public function destroy($id)
-    {
-        $obat = Obat::findOrFail($id);
-        if ($obat->foto) {
-            $filePath = public_path('images/obat/' . $obat->foto);
-            if (file_exists($filePath)) {
-                unlink($filePath);
-            }
-        }
-        $obat->delete();
+  public function destroy($id)
+{
+    $obat = Obat::findOrFail($id);
 
-        return redirect()->route('obat.index')->with('success', 'Obat berhasil dihapus.');
+    // Hapus file dari storage jika ada
+    if ($obat->foto && Storage::disk('public')->exists($obat->foto)) {
+        Storage::disk('public')->delete($obat->foto);
     }
+
+    $obat->delete();
+
+    return redirect()->route('obat.index')->with('success', 'Obat berhasil dihapus.');
+}
+
 }
