@@ -31,6 +31,13 @@
       <a href="/login" class="hidden md:block bg-white text-gray-800 text-xs font-normal px-4 py-1 rounded-sm hover:bg-gray-100 transition">
         Get Started
       </a>
+        <!-- Logout -->
+  <form method="POST" action="{{ route('logout') }}">
+    @csrf
+    <button type="submit" class="text-gray-600 hover:text-red-600 text-sm font-semibold">
+      <i class="fas fa-sign-out-alt mr-1"></i> Logout
+    </button>
+  </form>
     </header>
 
     <main class="relative z-10 flex flex-1 flex-col justify-center items-start px-6 md:px-20 py-20 max-w-4xl mx-auto text-white">

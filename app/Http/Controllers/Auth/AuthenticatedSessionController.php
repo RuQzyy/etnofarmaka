@@ -22,16 +22,21 @@ class AuthenticatedSessionController extends Controller
     /**
      * Handle an incoming authentication request.
      */
-   public function store(LoginRequest $request): RedirectResponse
+public function store(LoginRequest $request): RedirectResponse
 {
     $request->authenticate();
 
     $request->session()->regenerate();
 
-    // Redirect ke halaman berdasarkan role
-   return redirect()->route(Auth::user()->role . '.dashboard');
+    $user = Auth::user();
 
+    if (!$user) {
+        return redirect()->route('login')->withErrors(['auth' => 'Login gagal.']);
+    }
+
+    return redirect()->route($user->role . '.dashboard');
 }
+
 
 
     /**
