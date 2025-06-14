@@ -78,7 +78,7 @@
             <p><strong>Harga:</strong> Rp {{ number_format($obat->harga, 0, ',', '.') }}</p>
             <p><strong>Stok:</strong> {{ $obat->stok }}</p>
             <p><strong>Deskripsi:</strong></p>
-            <p class="text-gray-700">{{ $obat->deskripsi }}</p>
+            <p class="text-gray-700">{{ $obat->keterangan }}</p>
           </div>
         </div>
         <div class="modal-footer">
@@ -105,7 +105,7 @@
             <p><strong>Harga:</strong> Rp {{ number_format($obat->harga, 0, ',', '.') }}</p>
             <p><strong>Stok:</strong> {{ $obat->stok }}</p>
             <p><strong>Deskripsi:</strong></p>
-            <p class="text-gray-700">{{ $obat->deskripsi }}</p>
+            <p class="text-gray-700">{{ $obat->keterangan }}</p>
           </div>
         </div>
         <div class="modal-footer">
