@@ -28,14 +28,11 @@
         <a class="hover:underline" href="{{ url('/landing') }}">Home</a>
         <a class="hover:underline" href="{{ url('/tentang') }}">About Us</a>
       </nav>
-      <a href="/login" class="hidden md:block bg-white text-gray-800 text-xs font-normal px-4 py-1 rounded-sm hover:bg-gray-100 transition">
-        Get Started
-      </a>
         <!-- Logout -->
   <form method="POST" action="{{ route('logout') }}">
     @csrf
-    <button type="submit" class="text-gray-600 hover:text-red-600 text-sm font-semibold">
-      <i class="fas fa-sign-out-alt mr-1"></i> Logout
+    <button type="submit"class="hidden md:block bg-white text-gray-800 text-xs font-normal px-4 py-1 rounded-sm hover:bg-gray-100 transition">
+      <i class="fas fa-sign-out-alt mr-1"></i> Login
     </button>
   </form>
     </header>
