@@ -11,12 +11,16 @@
   <meta name="keywords" content="bootstrap, bootstrap4" />
 
 		<!-- Bootstrap CSS -->
-<link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-<link href="{{ asset('css/tiny-slider.css') }}" rel="stylesheet">
-<link href="{{ asset('css/style.css') }}" rel="stylesheet">
+	<link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+	<link href="{{ asset('css/tiny-slider.css') }}" rel="stylesheet">
+	<link href="{{ asset('css/style.css') }}" rel="stylesheet">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+	
+	<!-- Font Awesome for icons -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-		<title>Furni Free Bootstrap 5 Template for Furniture and Interior Design Websites by Untree.co </title>
+	<title>Furni Free Bootstrap 5 Template for Furniture and Interior Design Websites by Untree.co </title>
 	</head>
 
 	<body>
@@ -41,16 +45,40 @@
 						<li><a class="nav-link" href="about.html">About us</a></li>
 						<li><a class="nav-link" href="contact.html">Contact us</a></li>
 					</ul>
-
-					<ul class="custom-navbar-cta navbar-nav mb-2 mb-md-0 ms-5">
-  <li>
-    <a href="{{ route('login') }}" class="btn btn-dark d-flex align-items-center gap-2 px-4 py-2 rounded-pill shadow-sm">
-      <img src="{{ asset('img/user.svg') }}" alt="Login" style="width: 20px;">
-      <span style="font-weight: 500;">Login</span>
-    </a>
-  </li>
-</ul>
-
+					@auth
+						<!-- Dropdown -->
+						<div class="dropdown text-end">
+						<a href="#" class="d-flex align-items-center text-decoration-none text-white dropdown-toggle" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+							<!-- <img src="https://via.placeholder.com/32" alt="User Avatar" width="32" height="32" class="rounded-circle me-2"> -->
+							<span class="d-none d-sm-inline">{{ Auth::user()->name }}</span>
+						</a>
+						<ul class="dropdown-menu dropdown-menu-end text-small" aria-labelledby="userDropdown">
+							<li>
+							<a class="dropdown-item" href="{{ route('profile.edit') }}">
+								<i class="bi bi-person me-2"></i> Profile
+							</a>
+							</li>
+							<li><hr class="dropdown-divider"></li>
+							<li>
+							<form method="POST" action="{{ route('logout') }}">
+								@csrf
+								<button type="submit" class="dropdown-item text-danger">
+								<i class="bi bi-box-arrow-right me-2"></i> Logout
+								</button>
+							</form>
+							</li>
+						</ul>
+						</div>
+					@else
+						<ul class="custom-navbar-cta navbar-nav mb-2 mb-md-0 ms-5">
+							<li>
+								<a href="{{ route('login') }}" class="btn btn-dark d-flex align-items-center gap-2 px-4 py-2 rounded-pill shadow-sm">
+								<img src="{{ asset('img/user.svg') }}" alt="Login" style="width: 20px;">
+								<span style="font-weight: 500;">Login</span>
+								</a>
+							</li>
+						</ul>
+					@endauth
 
 				</div>
 			</div>
