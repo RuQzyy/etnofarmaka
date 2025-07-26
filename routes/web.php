@@ -5,14 +5,13 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\PenggunaController;
 use App\Http\Controllers\ObatController;
+use App\Http\Controllers\LandingController;
 
 Route::get('/', function () {
     return view('landing');
 });
 
-Route::get('/landing', function () {
-    return view('landing'); // ganti dengan nama file blade halaman landingmu
-});
+ Route::get('/', [LandingController::class, 'index'])->name('landing');
 
 Route::get('/tentang', function () {
     return view('tentang'); // pastikan kamu punya file resources/views/tentang.blade.php
