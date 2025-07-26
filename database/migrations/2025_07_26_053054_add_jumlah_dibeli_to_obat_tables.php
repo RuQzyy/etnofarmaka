@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('obat', function (Blueprint $table) {
-            $table->integer('jumlah');
+            $table->integer('jumlah_dibeli')->default(0)->after('stok');
         });
     }
 
