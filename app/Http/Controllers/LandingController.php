@@ -11,7 +11,7 @@ class LandingController extends Controller
     public function index()
     {
         // Ambil 4 produk terbaru dari tabel obat
-        $produkTerbaru = Obat::latest()->take(4)->get();
+        $produkTerbaru = Obat::latest()->take(3)->get();
 
         // Ambil 4 produk terlaris berdasarkan jumlah total penjualan
         $produkTerlaris = DB::table('item_pesanan')
