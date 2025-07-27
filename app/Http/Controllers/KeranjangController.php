@@ -6,10 +6,13 @@ use Illuminate\Http\Request;
 use App\Models\Keranjang;
 use App\Models\ItemKeranjang;
 use App\Models\Obat; // Pastikan model Obat di-import
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Support\Facades\Auth; // Untuk mendapatkan user yang login
 
 class KeranjangController extends Controller
 {
+    use AuthorizesRequests;
+
     /**
      * Menampilkan semua item dalam keranjang milik pengguna yang sedang login.
      */
@@ -82,7 +85,7 @@ class KeranjangController extends Controller
         
         // Pastikan user yang login adalah pemilik keranjang
         // Ini adalah langkah keamanan penting
-        // $this->authorize('update', $item->keranjang);
+        $this->authorize('update', $item->keranjang);
 
         $item->update(['jumlah' => $request->jumlah]);
 
@@ -95,9 +98,8 @@ class KeranjangController extends Controller
     public function hapus($id)
     {
         $item = ItemKeranjang::findOrFail($id);
-        
         // Otorisasi untuk memastikan user berhak menghapus
-        // $this->authorize('delete', $item->keranjang);
+        $this->authorize('delete', $item->keranjang);
 
         $item->delete();
 
