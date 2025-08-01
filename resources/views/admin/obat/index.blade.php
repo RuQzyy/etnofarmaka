@@ -20,6 +20,7 @@
                                     <th>Foto</th>
                                     <th>Nama Obat</th>
                                     <th>Stok</th>
+                                    <th>Jumlah Dibeli</th>
                                     <th>Harga</th>
                                     <th>Aksi</th>
                                 </tr>
@@ -37,6 +38,7 @@
                                         </td>
                                         <td>{{ $obat->nama_obat }}</td>
                                         <td>{{ $obat->stok }}</td>
+                                        <td>{{ $obat->jumlah_dibeli }}</td>
                                         <td>Rp {{ number_format($obat->harga, 0, ',', '.') }}</td>
                                         <td>
                                             <a href="{{ route('obat.edit', $obat->id) }}" class="btn btn-warning btn-sm">Edit</a>

@@ -11,11 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('item_pesanan', function (Blueprint $table) {
+        Schema::create('pembayaran', function (Blueprint $table) {
             $table->id();
             $table->foreignId('id_pemesanan')->constrained('pemesanan')->onDelete('cascade');
-            $table->foreignId('id_obat')->constrained('obat')->onDelete('cascade');
-            $table->integer('jumlah')->default(1);
+            $table->decimal('jumlah_bayar', 15, 2);
+            $table->string('metode_pembayaran'); // misal: 'Transfer Bank', 'GoPay', dll.
+            $table->enum('status_pembayaran', ['pending', 'sukses', 'gagal'])->default('pending');
+            $table->timestamp('tanggal_bayar')->nullable();
             $table->timestamps();
         });
     }
@@ -25,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('item_pesanan');
+        Schema::dropIfExists('pembayaran');
     }
 };

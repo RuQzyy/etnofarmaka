@@ -8,20 +8,21 @@ use Illuminate\Support\Facades\DB;
 
 class PenggunaController extends Controller
 {
+    // Ganti isi fungsi index() Anda dengan ini:
     public function index()
     {
-        // Ambil 4 produk terbaru dari tabel obat
+        // Ambil 4 produk terbaru
         $produkTerbaru = Obat::latest()->take(4)->get();
 
-        // Ambil 4 produk terlaris berdasarkan jumlah total penjualan
-        $produkTerlaris = DB::table('item_pesanan')
-            ->join('obat', 'item_pesanan.id_obat', '=', 'obat.id')
-            ->select('obat.*', DB::raw('SUM(item_pesanan.jumlah) as total_terjual'))
-            ->groupBy('obat.id', 'obat.nama_obat', 'obat.harga', 'obat.stok', 'obat.keterangan', 'obat.foto', 'obat.created_at', 'obat.updated_at')
-            ->orderByDesc('total_terjual')
-            ->limit(4)
+        // Ambil 4 produk terlaris berdasarkan jumlah dibeli
+        $produkTerlaris = Obat::where('stok', '>', 0) // Hanya tampilkan yang ada stok
+            ->orderBy('jumlah_dibeli', 'desc')
+            ->take(4)
             ->get();
 
-        return view('pengguna.dashboard', compact('produkTerbaru', 'produkTerlaris'));
+        // Ambil SEMUA produk dengan paginasi 10 per halaman
+        $semuaProduk = Obat::latest()->paginate(10);
+
+        return view('pengguna.dashboard', compact('produkTerbaru', 'produkTerlaris', 'semuaProduk'));
     }
 }

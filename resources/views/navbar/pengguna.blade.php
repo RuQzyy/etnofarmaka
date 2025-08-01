@@ -7,9 +7,9 @@
       <button aria-label="Menu" class="text-2xl text-teal-600 hover:text-teal-800 lg:hidden">
         <i class="fas fa-bars"></i>
       </button>
-      <a href="#" class="flex items-center space-x-2">
-        <img src="https://storage.googleapis.com/a1aa/image/3b6fdb0e-78fb-4269-36c8-4ed708a9fbea.jpg" alt="Logo" class="h-10 w-auto rounded shadow-sm" />
-        <span class="hidden sm:inline text-lg font-bold text-teal-700">Bhumihara Farma</span>
+      <a href="{{route('pengguna.dashboard')}}" class="flex items-center space-x-2">
+        <img src="{{asset('images/logo etnofarmaka.png')}}" alt="Logo" class="h-10 w-auto rounded shadow-sm" />
+        <span class="hidden sm:inline text-lg font-bold text-teal-700">Etnofarmaka Digital</span>
       </a>
     </div>
 
@@ -44,18 +44,18 @@
           </span>
         @endif
       </a>
-      <!-- User -->
-      <a href="#" class="text-gray-600 hover:text-gray-900 text-2xl">
-        <i class="fas fa-user-circle"></i>
+      {{-- pemesanan --}}
+      <a href="{{route('pemesanan.index')}}" class="text-gray-600 hover:text-gray-900 text-2xl">
+        <i class="fas fa-file-invoice-dollar"></i>
       </a>
 
       <!-- Logout -->
-  <form method="POST" action="{{ route('logout') }}">
-    @csrf
-    <button type="submit" class="text-gray-600 hover:text-red-600 text-sm font-semibold">
-      <i class="fas fa-sign-out-alt mr-1"></i> Logout
-    </button>
-  </form>
+      <form method="POST" action="{{ route('logout') }}">
+        @csrf
+        <button type="submit" class="text-gray-600 hover:text-red-600 text-sm font-semibold">
+          <i class="fas fa-sign-out-alt mr-1"></i> Logout
+        </button>
+      </form>
     </div>
   </div>
 </header>

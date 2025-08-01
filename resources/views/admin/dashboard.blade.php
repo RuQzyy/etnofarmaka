@@ -12,7 +12,7 @@
           <div class="info-box-content">
             <span class="info-box-text">Obat</span>
             <span class="info-box-number">
-              {{-- {{}} --}}
+              {{$obat_count}}
             </span>
           </div>
           <!-- /.info-box-content -->
@@ -31,7 +31,7 @@
           </span>
           <div class="info-box-content">
             <span class="info-box-text">Pemesanan</span>
-            {{-- <span class="info-box-number">{{}}</span> --}}
+            <span class="info-box-number">{{$pemesanan_count}}</span>
           </div>
           <!-- /.info-box-content -->
         </div>

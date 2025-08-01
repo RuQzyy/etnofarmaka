@@ -45,7 +45,7 @@
         @empty
             <div class="text-center py-10">
                 <p class="text-gray-500 text-xl">Keranjang Anda masih kosong.</p>
-                <a href="{{ url('/') }}" class="btn btn-primary mt-4">Mulai Belanja</a>
+                <a href="{{ route('pengguna.dashboard') }}" class="btn btn-primary mt-4">Mulai Belanja</a>
             </div>
         @endforelse
 
@@ -55,9 +55,12 @@
                     <span class="text-teal-700">Rp {{ number_format($totalHarga, 0, ',', '.') }}</span>
                 </h2>
                 <p class="text-gray-500 text-sm">Belum termasuk ongkos kirim.</p>
-                <a href="{{ route('checkout.index') }}" class="btn btn-success btn-lg mt-4">
-                    Lanjutkan ke Pembayaran
-                </a>
+                <form action="{{ route('checkout.process') }}" method="POST" class="mt-4">
+                    @csrf
+                    <button type="submit" class="btn btn-success btn-lg">
+                        Lanjutkan ke Pembayaran
+                    </button>
+                </form>
             </div>
         @endif
     </div>
