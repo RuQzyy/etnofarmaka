@@ -20,7 +20,7 @@
 	<!-- Font Awesome for icons -->
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-	<title>Furni Free Bootstrap 5 Template for Furniture and Interior Design Websites by Untree.co </title>
+	<title>ETNOFARMAKA DIGITAL </title>
 	</head>
 
 	<body>
@@ -30,8 +30,8 @@
 
 			<div class="container">
 				<a class="navbar-brand" href="index.html">
-          <img src="{{asset('img/logo_etnofarmaka.jpg')}}" class="rounded-circle" alt="" style="width:90px">
-        </a>
+					<img src="{{asset('img/logo_etnofarmaka.jpg')}}" class="rounded-circle" alt="" style="width:90px">
+				</a>
 
 				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsFurni" aria-controls="navbarsFurni" aria-expanded="false" aria-label="Toggle navigation">
 					<span class="navbar-toggler-icon"></span>
@@ -40,7 +40,7 @@
 				<div class="collapse navbar-collapse" id="navbarsFurni">
 					<ul class="custom-navbar-nav navbar-nav ms-auto mb-2 mb-md-0">
 						<li class="nav-item active">
-							<a class="nav-link" href="index.html">Home</a>
+							<a class="nav-link" href="{{route('landing')}}">Home</a>
 						</li>
 						<li><a class="nav-link" href="about.html">About us</a></li>
 						<li><a class="nav-link" href="contact.html">Contact us</a></li>
@@ -49,11 +49,21 @@
 						<!-- Dropdown -->
 						<div class="dropdown text-end">
 						<a href="#" class="d-flex align-items-center text-decoration-none text-white dropdown-toggle" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-							<!-- <img src="https://via.placeholder.com/32" alt="User Avatar" width="32" height="32" class="rounded-circle me-2"> -->
 							<span class="d-none d-sm-inline">{{ Auth::user()->name }}</span>
 						</a>
 						<ul class="dropdown-menu dropdown-menu-end text-small" aria-labelledby="userDropdown">
 							<li>
+								@auth
+									@if(auth()->user()->role == 'admin')
+										<a class="dropdown-item" href="{{ route('admin.dashboard') }}">
+											<i class="bi bi-person-workspace me-2"></i> Dashboard
+										</a>
+									@else
+										<a class="dropdown-item" href="{{ route('pengguna.dashboard') }}">
+											<i class="bi bi-person-workspace me-2"></i> Dashboard
+										</a>
+									@endif
+								@endauth
 							<a class="dropdown-item" href="{{ route('profile.edit') }}">
 								<i class="bi bi-person me-2"></i> Profile
 							</a>
@@ -242,32 +252,6 @@
   </div>
 </div>
 <!-- End We Help Section -->
-
-		<!-- Start Popular Product -->
-<div class="popular-product py-5">
-  <div class="container">
-    <div class="row">
-
-      @foreach ($produkTerlaris as $produk)
-        <div class="col-12 col-md-6 col-lg-4 mb-4">
-          <div class="product-item-sm d-flex">
-            <div class="thumbnail">
-              <img src="{{ asset('img/' . $produk->gambar) }}" alt="{{ $produk->nama }}" class="img-fluid">
-            </div>
-            <div class="pt-3 ps-3">
-              <h3 class="mb-1">{{ $produk->nama }}</h3>
-              <p class="mb-2">{{ Str::limit($produk->deskripsi, 80) }}</p>
-              <p><a href="{{ route('produk.show', $produk->id) }}">Lihat Detail</a></p>
-            </div>
-          </div>
-        </div>
-      @endforeach
-
-    </div>
-  </div>
-</div>
-<!-- End Popular Product -->
-
 		<!-- Start Testimonial Slider -->
 		<div class="testimonial-section">
 			<div class="container">
@@ -473,7 +457,7 @@
 		<!-- End Footer Section -->
 
 
-		<script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
+<script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
 <script src="{{ asset('js/tiny-slider.js') }}"></script>
 <script src="{{ asset('js/custom.js') }}"></script>
 

@@ -96,7 +96,7 @@
           <a href="#" class="brand-link">
             <!--begin::Brand Image-->
             <img
-              src="{{asset('asset/kopi.png')}}"
+              src="{{asset('images/logo etnofarmaka.png')}}"
               alt="Kopi Logo"
               class="brand-image opacity-75 shadow"
             />
@@ -119,7 +119,7 @@
               data-accordion="false"
             >
               <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="{{route('admin.dashboard')}}" class="nav-link">
                   <i class="nav-icon fa fa-user"></i>
                   <p>Dashboard</p>
                 </a>
@@ -130,14 +130,8 @@
                   <p>Obat</p>
                 </a>
               </li>
-              {{-- <li class="nav-item">
-                <a href="{{route('keuangan.index')}}" class="nav-link">
-                  <i class="nav-icon bi bi-cash"></i>
-                  <p>Keuangan</p>
-                </a>
-              </li> --}}
               <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="{{route('pemesanan.admin')}}" class="nav-link">
                   <i class="fas fa-shopping-basket"></i>
                   <p>Pemesanan</p>
                 </a>

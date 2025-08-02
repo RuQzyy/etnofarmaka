@@ -6,10 +6,13 @@ use Illuminate\Http\Request;
 use App\Models\Keranjang;
 use App\Models\ItemKeranjang;
 use App\Models\Obat; // Pastikan model Obat di-import
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Support\Facades\Auth; // Untuk mendapatkan user yang login
 
 class KeranjangController extends Controller
 {
+    use AuthorizesRequests;
+
     /**
      * Menampilkan semua item dalam keranjang milik pengguna yang sedang login.
      */
@@ -26,7 +29,7 @@ class KeranjangController extends Controller
         });
 
         // Kirim data ke view
-        return view('keranjang.index', compact('items', 'totalHarga'));
+        return view('pengguna.keranjang.index', compact('items', 'totalHarga'));
     }
     // ...
 
@@ -52,6 +55,12 @@ class KeranjangController extends Controller
         $item = ItemKeranjang::where('id_keranjang', $keranjang->id)
                              ->where('id_obat', $idObat)
                              ->first();
+
+        // Cek apakah jumlah obat yang diminta tidak melebihi stok
+        $obat = Obat::findOrFail($idObat);
+            if ($jumlah > $obat->stok) {
+                return redirect()->back()->with('warning', "Jumlah obat yang diminta tidak tersedia. Stok saat ini $obat->stok");
+            }
 
         if ($item) {
             // Jika sudah ada, tambahkan jumlahnya
@@ -80,9 +89,15 @@ class KeranjangController extends Controller
         // Cari item berdasarkan ID-nya
         $item = ItemKeranjang::findOrFail($id);
         
+        // Cek apakah jumlah obat yang diminta tidak melebihi stok
+        $obat = Obat::findOrFail($item->id_obat);
+            if ($request->jumlah > $obat->stok) {
+                return redirect()->back()->with('warning', "Jumlah obat yang diminta tidak tersedia. Stok saat ini $obat->stok");
+            }
+
         // Pastikan user yang login adalah pemilik keranjang
         // Ini adalah langkah keamanan penting
-        // $this->authorize('update', $item->keranjang);
+        $this->authorize('update', $item->keranjang);
 
         $item->update(['jumlah' => $request->jumlah]);
 
@@ -95,11 +110,15 @@ class KeranjangController extends Controller
     public function hapus($id)
     {
         $item = ItemKeranjang::findOrFail($id);
-        
         // Otorisasi untuk memastikan user berhak menghapus
-        // $this->authorize('delete', $item->keranjang);
+        $this->authorize('delete', $item->keranjang);
 
         $item->delete();
+
+        // Jika item terakhir dihapus, hapus juga keranjang
+        if (is_null($item->keranjang->itemKeranjang)) {
+            $item->keranjang->delete();
+        }
 
         return redirect()->route('keranjang.index')->with('success', 'Obat berhasil dihapus dari keranjang.');
     }
